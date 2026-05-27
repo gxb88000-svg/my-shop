@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>全球潮流精选 · 高阶集合店</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            background-image: radial-gradient(circle at 25% 40%, rgba(30,30,40,0.9) 0%, #030303 100%);
+            padding: 30px 20px;
+            color: #ecedee;
+        }
+
+        /* 主容器 - 玻璃质感 */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(12, 12, 16, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            border: 1px solid rgba(255, 215, 120, 0.2);
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+            overflow: hidden;
+            padding: 28px 32px 48px;
+        }
+
+        /* 头部品牌区 */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .brand-badge {
+            display: inline-block;
+            background: rgba(210, 180, 110, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 6px 20px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            color: #e6d5a8;
+            border: 0.5px solid rgba(210, 180, 110, 0.4);
+            margin-bottom: 18px;
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFF8E7 0%, #E0C878 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        .tagline {
+            font-size: 0.9rem;
+            color: #aaa6c0;
+            border-top: 1px solid rgba(210,180,110,0.3);
+            display: inline-block;
+            padding-top: 12px;
+            font-style: italic;
+        }
+        .sub {
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            border-radius: 80px;
+            width: fit-content;
+            margin: 18px auto 20px;
+            padding: 12px 28px;
+            backdrop-filter: blur(4px);
+            font-size: 0.9rem;
+            border: 0.5px solid rgba(210,180,110,0.4);
+            line-height: 1.6;
+        }
+        .sub strong {
+            color: #e6c35c;
+        }
+
+        /* 四核心理念 */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            margin: 36px 0 20px;
+        }
+        .feat-item {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c0bbd9;
+        }
+        .feat-icon {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* 商品网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 20px;
+            margin: 40px 0 36px;
+        }
+        .card {
+            background: rgba(20, 20, 28, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(210, 180, 110, 0.25);
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #e6c35c;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.6);
+            background: rgba(28, 28, 36, 0.9);
+        }
+        .card-inner {
+            padding: 22px 10px 18px;
+            text-align: center;
+        }
+        .card-emoji {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #f0eef7;
+        }
+        .card-code {
+            font-size: 0.65rem;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            color: #e6c35c;
+            font-family: monospace;
+        }
+
+        /* 品牌墙 */
+        .brand-wall {
+            margin: 50px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(210,180,110,0.3);
+            padding-top: 30px;
+        }
+        .brand-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .brand-logos a {
+            color: #b9b1dc;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .brand-logos a:hover {
+            color: #e6c35c;
+            text-decoration: underline;
+        }
+
+        /* 微信卡片 */
+        .wechat-section {
+            background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(30,30,40,0.8));
+            border-radius: 32px;
+            border: 1px solid rgba(230,195,92,0.5);
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 20px 0 16px;
+        }
+        .wechat-info {
+            flex: 2;
+        }
+        .wechat-id {
+            background: #00000066;
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-family: monospace;
+            letter-spacing: 1px;
+            color: #e6c35c;
+            margin: 8px 0;
+        }
+        .btn-wechat {
+            background: #e6c35c;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-wechat:hover { background: #f5d97a; transform: scale(0.97);}
+        .wechat-qr {
+            background: white;
+            padding: 8px;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .footer-create {
+            text-align: center;
+            margin-top: 48px;
+        }
+        .create-link {
+            background: transparent;
+            border: 1px solid #e6c35c;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #e6c35c;
+            cursor: pointer;
+        }
+        .create-link:hover {
+            background: #e6c35c;
+            color: #0a0a0a;
+        }
+
+        .wholesale-note {
+            text-align: center;
+            margin-top: 30px;
+            padding: 18px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #e6c35c;
+            border: 0.5px solid rgba(230,195,92,0.3);
+        }
+
+        /* 密码弹窗样式优化 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background: #16161a;
+            border-radius: 32px;
+            padding: 35px;
+            width: 340px;
+            text-align: center;
+            border: 1px solid rgba(230,195,92,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 15px 0 10px;
+            border-radius: 20px;
+            border: 1px solid #444;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            outline: none;
+        }
+        .modal-content input:focus {
+            border-color: #e6c35c;
+        }
+        .modal-btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .modal-btn-group button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 20px; border-radius: 28px; }
+            h1 { font-size: 2.0rem; }
+            .sub { font-size: 0.8rem; border-radius: 20px; padding: 12px 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="brand-header">
+        <div class="brand-badge">GLOBAL FASHION SELECT SHOP</div>
+        <h1>NEXORA<br><span style="font-size: 1rem; letter-spacing: 4px;">SELECT</span></h1>
+        <div class="tagline">STYLE IS A CHOICE · QUALITY IS OUR STANDARD</div>
+        <div class="sub">
+            📸 选择款式 ➕ <strong>添加微信 GXB88000</strong> 发送图片获取报价<br>
+            全球精选 · 一件代发 · 顶级复刻
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="feat-item"><span class="feat-icon">✅</span> 正品保证</div>
+        <div class="feat-item"><span class="feat-icon">🌍</span> 全球精选</div>
+        <div class="feat-item"><span class="feat-icon">🔥</span> 新品速递</div>
+        <div class="feat-item"><span class="feat-icon">⚡</span> 快速发货</div>
+    </div>
+
+    <div class="grid" id="productGrid"></div>
+
+    <div class="brand-wall">
+        <div class="brand-logos">
+            <a href="https://www.prada.com" target="_blank" rel="noopener noreferrer">PRADA</a>
+            <a href="https://www.dior.com" target="_blank" rel="noopener noreferrer">DIOR</a>
+            <a href="https://www.balenciaga.com" target="_blank" rel="noopener noreferrer">BALENCIAGA</a>
+            <a href="https://www.chanel.com" target="_blank" rel="noopener noreferrer">CHANEL</a>
+            <a href="https://www.louisvuitton.com" target="_blank" rel="noopener noreferrer">LOUIS VUITTON</a>
+            <a href="https://www.gucci.com" target="_blank" rel="noopener noreferrer">GUCCI</a>
+            <a href="https://www.ysl.com" target="_blank" rel="noopener noreferrer">SAINT LAURENT</a>
+            <a href="https://www.celine.com" target="_blank" rel="noopener noreferrer">CELINE</a>
+        </div>
+        <div style="font-size: 0.7rem; margin-top: 20px; letter-spacing: 2px;">CURATED FOR EVERYDAY LUXURY</div>
+    </div>
+
+    <div class="wechat-section">
+        <div class="wechat-info">
+            <div style="font-weight: bold; font-size: 1.3rem;">📱 WECHAT STORE</div>
+            <div>扫一扫添加好友，或直接搜索ID：</div>
+            <div class="wechat-id">微信号：GXB88000</div>
+            <button class="btn-wechat" id="copyWechatBtn">📋 复制微信号</button>
+        </div>
+        <div class="wechat-qr">
+            <img id="wechatQRImg" src="wechat-qr.png" alt="微信二维码" style="width:100px; border-radius: 18px;">
+            <div style="font-size: 10px; margin-top: 6px;">SCAN TO SHOP</div>
+        </div>
+    </div>
+
+    <div class="wholesale-note">
+        🤝 承接各种批发，口粮，酒水接待等 🤝
+    </div>
+
+    <div class="footer-create">
+        <button class="create-link" id="createVlinkBtn">✨ 创建你的 VLink</button>
+        <p style="font-size: 11px; margin-top: 18px; opacity:0.6;">点击商品 → 联系微信客服 · 密码专区提供高端预览</p>
+    </div>
+</div>
+
+<div id="passwordModal" class="modal">
+    <div class="modal-content">
+        <span style="font-size: 32px;">🔐</span>
+        <h3 style="margin: 10px 0; color: #e6c35c;">外部相册提示</h3>
+        <p id="modalProductName" style="font-size: 0.85rem; color: #aaa;">该专区需要输入独立访问密码</p>
+        <input type="password" id="passwordInput" placeholder="请输入密码" autocomplete="off">
+        <div class="modal-btn-group">
+            <button id="closeModalBtn" style="background:#333; color:#ccc;">取消</button>
+            <button id="submitPasswordBtn" style="background:#e6c35c; color:#000;">访问</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 数据集优化：解耦 emoji 与名称
+    const products = [
+        { name: "衣服服饰", emoji: "👕", type: "link", externalUrl: "https://k-kgvcch123.x.yupoo.com/categories", note: "Code:666888", code: "666888" },
+        { name: "潮鞋类", emoji: "👟", type: "link", externalUrl: "https://modern2019.x.yupoo.com/categories", note: "摩登鞋业" },
+        { name: "包包系列 A", emoji: "👜", type: "link", externalUrl: "https://3293950449.x.yupoo.com/categories", note: "潮流包包" },
+        { name: "包包系列 B", emoji: "👛", type: "link", externalUrl: "https://jmp81314.x.yupoo.com/categories", note: "高端包袋" },
+        { name: "潮牌供应链", emoji: "🔥", type: "link", externalUrl: "https://mujichaopaia.x.yupoo.com/categories/5195062?navSource=custom", note: "Code:188288388", code: "188288388" },
+        { name: "帽子专区", emoji: "🧢", type: "link", externalUrl: "https://nininid.x.yupoo.com/albums?tab=gallery", note: "潮流帽饰" },
+        { name: "潮服 (嘻哈)", emoji: "👔", type: "link", externalUrl: "https://x.yupoo.com/photos/xihabang/categories", note: "嘻哈潮服" },
+        { name: "板鞋/女鞋", emoji: "👟", type: "link", externalUrl: "https://golden-goose.x.yupoo.com/albums?tab=gallery", note: "Golden Goose" },
+        { name: "眼镜专区", emoji: "👓", type: "link", externalUrl: "https://jiliyanjing.x.yupoo.com/categories", note: "密码:968816", password: "968816" },
+        { name: "巴黎世家鞋", emoji: "👟", type: "link", externalUrl: "https://vgvgvgvgvg56789.x.yupoo.com/categories", note: "Balenciaga 全系列" },
+        { name: "凉拖/女鞋", emoji: "👡", type: "link", externalUrl: "https://nulixieye.x.yupoo.com/categories/3105308", note: "夏季凉拖" },
+        { name: "香水系列", emoji: "🌸", type: "link", externalUrl: "https://jmshop88.x.yupoo.com/categories/4594940", note: "高端香水" },
+        { name: "电子烟", emoji: "💨", type: "link", externalUrl: "https://www.relxnow.com", note: "RELX 悦刻官网" },
+        { name: "户外风 (始祖鸟/北面)", emoji: "🏔️", type: "link", externalUrl: "https://wang568568.x.yupoo.com/categories", note: "户外新款直销" },
+        { name: "潮牌户外", emoji: "🧥", type: "link", externalUrl: "https://chaopaiku.x.yupoo.com/categories/", note: "服装选款 持续更新" }
+    ];
+
+    const WECHAT_ID = "GXB88000";
+    let activeProduct = null;
+
+    // 渲染网格
+    function renderGrid() {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        products.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.onclick = () => handleProductClick(p);
+            
+            let badgeText = "🔗 查看相册";
+            if (p.code) badgeText = `Code ${p.code}`;
+            else if (p.password) badgeText = `🔒 密码: ${p.password}`;
+
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-emoji">${p.emoji}</div>
+                    <div class="card-title">${p.name}</div>
+                    <div class="card-code">${badgeText}</div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // 点击事件分发
+    function handleProductClick(p) {
+        if (p.password) {
+            activeProduct = p;
+            document.getElementById('modalProductName').innerText = `请输入「${p.name}」的访问密码（提示: ${p.password}）`;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordModal').classList.add('active');
+        } else if (p.externalUrl) {
+            window.open(p.externalUrl, '_blank');
+        }
+    }
+
+    // 密码弹窗逻辑
+    document.getElementById('submitPasswordBtn').addEventListener('click', () => {
+        const inputPwd = document.getElementById('passwordInput').value;
+        if (activeProduct && inputPwd === activeProduct.password) {
+            window.open(activeProduct.externalUrl, '_blank');
+            document.getElementById('passwordModal').classList.remove('active');
+        } else {
+            alert('密码错误，请重新输入！');
+        }
+    });
+
+    document.getElementById('closeModalBtn').addEventListener('click', () => {
+        document.getElementById('passwordModal').classList.remove('active');
+    });
+
+    // 复制微信号
+    document.getElementById('copyWechatBtn')?.addEventListener('click', () => {
+        navigator.clipboard.writeText(WECHAT_ID).then(() => {
+            alert(`已成功复制微信号: ${WECHAT_ID}\n请打开微信添加好友。`);
+        });
+    });
+
+    document.getElementById('createVlinkBtn')?.addEventListener('click', () => alert('✨ 现已支持自由修改代码进行二次开发。'));
+
+    // 初始化
+    renderGrid();
+</script>
+</body>
+</html>
